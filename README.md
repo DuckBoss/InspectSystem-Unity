@@ -1,8 +1,8 @@
 # InspectSystem-Unity
 An inspection/examination system to read in-game signs. walls, etc
 
-[![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/DuckBoss/InspectSystem-Unity/releases/latest)
-[![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)](https://github.com/DuckBoss/InspectSystem-Unity/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/badge/Build-1.0-blue.svg)](https://github.com/DuckBoss/InspectSystem-Unity/releases/latest)
+[![Packagist](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/DuckBoss/InspectSystem-Unity/blob/master/LICENSE)
 
 ## Dependencies
 1) Text Mesh Pro (Available for Free on the Unity Asset Store)
