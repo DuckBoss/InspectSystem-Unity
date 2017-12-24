@@ -1,6 +1,8 @@
 # InspectSystem-Unity
 An inspection/examination system to read in-game signs. walls, etc
 
+[Latest Release](https://github.com/DuckBoss/InspectSystem-Unity/releases/latest)
+
 ## Dependencies
 1) Text Mesh Pro (Available for Free on the Unity Asset Store)
 2) Unity Standard Assets
