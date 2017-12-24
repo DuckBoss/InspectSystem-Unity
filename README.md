@@ -1,7 +1,7 @@
 # InspectSystem-Unity
 An inspection/examination system to read in-game signs. walls, etc
 
-[![GitHub release](https://img.shields.io/badge/Build-1.0-blue.svg)](https://github.com/DuckBoss/InspectSystem-Unity/releases/latest)
+[![GitHub release](https://img.shields.io/badge/Build-1.0-brightgreen.svg)](https://github.com/DuckBoss/InspectSystem-Unity/releases/latest)
 [![Packagist](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/DuckBoss/InspectSystem-Unity/blob/master/LICENSE)
 
 ## Dependencies
