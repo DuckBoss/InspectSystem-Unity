@@ -2,6 +2,7 @@
 An inspection/examination system to read in-game signs. walls, etc
 
 [Latest Release](https://github.com/DuckBoss/InspectSystem-Unity/releases/latest)
+[![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg)]()
 
 ## Dependencies
 1) Text Mesh Pro (Available for Free on the Unity Asset Store)
