@@ -6,7 +6,7 @@ using JJIS;
 
 public class InspectMenuInstancer : MonoBehaviour {
 
-	[MenuItem("JJIS/New Inspect Script Asset")]
+	[MenuItem("JJ_Systems/JJIS/New Inspect Script Asset")]
 	public static void CreateMyAsset_Simple() {
 		InspectObject asset = ScriptableObject.CreateInstance<InspectObject>();
 
