@@ -20,3 +20,4 @@ An inspection/examination system to read in-game signs. walls, etc
 ## Current Issues
 - Text Mesh Pro sometimes doesn't display the instructions above the sign in the demo scene on first start up.
 (Not an issue with the Inspect System)
+<b> Please use the updated release builds for maximum compatibility! </b>
