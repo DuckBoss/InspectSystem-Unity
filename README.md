@@ -5,9 +5,9 @@ An inspection/examination system to read in-game signs. walls, etc
 [![Packagist](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/DuckBoss/InspectSystem-Unity/blob/master/LICENSE)
 
 ## Dependencies
-1) Text Mesh Pro (Available for Free on the Unity Asset Store, used for the in-game UI, can be replaced with default Unity UI elements by messing with the code very easily)
+1) <b>Text Mesh Pro</b> (Available for Free on the Unity Asset Store, used for the in-game UI, can be replaced with default Unity UI elements by messing with the code very easily)
 
-2) Unity Standard Assets
+2) <b>Unity Standard Assets</b>
 
 ## Demo Scene
 - Press 'E' while looking at the sign and standing next to it.
