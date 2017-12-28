@@ -7,7 +7,7 @@ An inspection/examination system to read in-game signs. walls, etc
 ## Dependencies
 1) <b>Text Mesh Pro</b> (Available for Free on the Unity Asset Store, used for the in-game UI, can be replaced with default Unity UI elements by messing with the code very easily)
 
-2) <b>Unity Standard Assets</b>
+2) <b>Unity Standard Assets</b> (For the demo project, this isn't required for implementing into your own games)
 
 ## Demo Scene
 - Press 'E' while looking at the sign and standing next to it.
