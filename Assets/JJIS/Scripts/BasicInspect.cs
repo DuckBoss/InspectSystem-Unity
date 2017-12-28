@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
-using MovementEffects;
 using UnityStandardAssets.Characters.FirstPerson;
 
 namespace JJIS {
@@ -34,10 +33,7 @@ namespace JJIS {
 		// Determines if an object can be inspected multiple times.
 		[Tooltip("Determines if an object can be reinspected.")]
 		public bool canReinspect;
-		// Event will execute at the end of reinspectable objects if true, otherwise it only executes at the end of
-		// non reinspectable objects.
-		[Tooltip("Event will execute at the end of the reinspectable dialogue if true, otherwise it executes at the end of the non-reinspectable dialogue.")]
-		public bool invokeEventReinspectable;
+
 		// This event will execute at the end of the inspection dialogue if used.
 		[Tooltip("Event to execute at the end of dialogue.")]
 		public UnityEvent inspectEvent;
@@ -89,18 +85,18 @@ namespace JJIS {
 
 		//Runs the dialogue based on the completion of the line of text.
 		private void RunDialogue() {
-			Timing.KillCoroutines();
+			StopAllCoroutines();
 			if(lineIsComplete) {
-				Timing.RunCoroutine(NextDialogue(scriptCurrent));
+				StartCoroutine(NextDialogue(scriptCurrent));
 			}
 			else {
-				Timing.RunCoroutine(CurrentDialogue(scriptCurrent));
+				StartCoroutine(CurrentDialogue(scriptCurrent));
 			}
 		}
 
 		//Kills any active dialogue.
 		private void KillInspection() {
-			Timing.KillCoroutines();
+			StopAllCoroutines();
 			anim.SetTrigger("FadeOut");
 			scriptCurrent = 0;
 			lineIsComplete = false;
@@ -109,21 +105,14 @@ namespace JJIS {
 			player.GetComponent<FirstPersonController>().enabled = true;
 			scriptIsActive = false;
 
-			if(canReinspect) {
-				if(invokeEventReinspectable) {
-					if(inspectEvent != null)
-						inspectEvent.Invoke();
-				}
-			}
-			if(!canReinspect) {
-				if(inspectEvent != null)
-					inspectEvent.Invoke();
-			}
+			if(inspectEvent != null)
+				inspectEvent.Invoke();
+			
 			
 		}
 
 		//This method skips the scrolling and displays the full dialogue line.
-		IEnumerator<float> CurrentDialogue(int currentIndex) {
+		IEnumerator CurrentDialogue(int currentIndex) {
 			string fullString;
 			fullString = inspectScript.allScriptData[currentIndex];
 			scriptText.text = fullString;
@@ -139,7 +128,7 @@ namespace JJIS {
 		private float timeBetweenLetters = 0.03f;
 
 		//This method scrolls through the dialogue line and displays letter-by-letter.
-		IEnumerator<float> NextDialogue(int currentIndex) {
+		IEnumerator NextDialogue(int currentIndex) {
 			string fullString = "";
 			bool markup = false;
 			lineIsComplete = false;
@@ -160,7 +149,7 @@ namespace JJIS {
 						scriptText.text = fullString;
 						sfx_src.PlayOneShot(sfxClip);
 						sfx_src.pitch = Random.Range(minPitchMod,maxPitchMod);
-						yield return Timing.WaitForSeconds(timeBetweenLetters);
+						yield return new WaitForSeconds(timeBetweenLetters);
 					}
 				}
 				if(scriptCurrent < scriptCapacity-1) {
