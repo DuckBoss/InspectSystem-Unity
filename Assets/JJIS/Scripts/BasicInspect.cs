@@ -1,13 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
+using MovementEffects;
 using UnityStandardAssets.Characters.FirstPerson;
-
-/**
-Jason Jerome
-12/24/2017
- */
 
 namespace JJIS {
 	public class BasicInspect : MonoBehaviour {
@@ -33,21 +30,30 @@ namespace JJIS {
 		[Range(1.0f, 1.1f)]
 		public float maxPitchMod;
 
-		[Header("Character Scroll Time")]
-		public float timer = 0.2f;
+		[Header("Inspection Properties")]
+		// Determines if an object can be inspected multiple times.
+		[Tooltip("Determines if an object can be reinspected.")]
+		public bool canReinspect;
+		// Event will execute at the end of reinspectable objects if true, otherwise it only executes at the end of
+		// non reinspectable objects.
+		[Tooltip("Event will execute at the end of the reinspectable dialogue if true, otherwise it executes at the end of the non-reinspectable dialogue.")]
+		public bool invokeEventReinspectable;
+		// This event will execute at the end of the inspection dialogue if used.
+		[Tooltip("Event to execute at the end of dialogue.")]
+		public UnityEvent inspectEvent;
 
-		//Internal variables to handle script execution.
-		private bool canTriggerDialogue;
+		private bool firstTimeInspection = true;
 		private bool scriptIsActive;
 		private bool lineIsComplete;
 		private int scriptCapacity;
 		private int scriptCurrent;
 
-		//Initiates the inspection process.
+		//Starts the inspection process.
 		public void StartInspection () {
 			Debug.Log("Starting Inspection...");
-			InspectionTriggerToggle(false);
 			player.GetComponent<FirstPersonController>().enabled = false;
+
+			firstTimeInspection = false;
 
 			dialoguePanel.SetActive(true);
 			scriptCurrent = 0;
@@ -56,23 +62,15 @@ namespace JJIS {
 			scriptCapacity = inspectScript.allScriptData.Length;
 			scriptSubText.text = "<...>";
 			anim.SetTrigger("FadeIn");
-			RunInspection();
-		}
-		//Sets the boolean that checks if inspection can start.
-		public void InspectionTriggerToggle(bool val) {
-			canTriggerDialogue = val;
+			RunDialogue();
 		}
 
-		//Gets the boolean that checks if inspection can start.
-		public bool GetInspectionTrigger() {
-			return canTriggerDialogue;
-		}
-		
-		//Handles user input to initiate inspection.
+		//Handles user input
 		private void Update() {
+			//If you left click while the text is scrolling, it will skip and display the full text.
 			if(Input.GetMouseButtonDown(0) && scriptIsActive) {
 				if(scriptCurrent < scriptCapacity) {
-					RunInspection();
+					RunDialogue();
 				}
 				else {
 					KillInspection();
@@ -80,20 +78,29 @@ namespace JJIS {
 			}
 		}
 
-		//Handles the inspection process line by line.
-		private void RunInspection() {
-			StopAllCoroutines();
+		//Checks for first time inspection.
+		public bool isFirstTime() {
+			return firstTimeInspection;
+		}
+		//Checks for reinspectable objects.
+		public bool isReinspectable() {
+			return canReinspect;
+		}
+
+		//Runs the dialogue based on the completion of the line of text.
+		private void RunDialogue() {
+			Timing.KillCoroutines();
 			if(lineIsComplete) {
-				StartCoroutine(NextDialogue(scriptCurrent));
+				Timing.RunCoroutine(NextDialogue(scriptCurrent));
 			}
 			else {
-				CurrentInspection(scriptCurrent);
+				Timing.RunCoroutine(CurrentDialogue(scriptCurrent));
 			}
 		}
-		
-		//Kills an existing inspection process.
+
+		//Kills any active dialogue.
 		private void KillInspection() {
-			StopAllCoroutines();
+			Timing.KillCoroutines();
 			anim.SetTrigger("FadeOut");
 			scriptCurrent = 0;
 			lineIsComplete = false;
@@ -101,11 +108,22 @@ namespace JJIS {
 			
 			player.GetComponent<FirstPersonController>().enabled = true;
 			scriptIsActive = false;
-			InspectionTriggerToggle(true);
+
+			if(canReinspect) {
+				if(invokeEventReinspectable) {
+					if(inspectEvent != null)
+						inspectEvent.Invoke();
+				}
+			}
+			if(!canReinspect) {
+				if(inspectEvent != null)
+					inspectEvent.Invoke();
+			}
+			
 		}
 
-		//Handles the current inspection script data when a line isn't finished scrolling.
-		private void CurrentInspection(int currentIndex) {
+		//This method skips the scrolling and displays the full dialogue line.
+		IEnumerator<float> CurrentDialogue(int currentIndex) {
 			string fullString;
 			fullString = inspectScript.allScriptData[currentIndex];
 			scriptText.text = fullString;
@@ -114,11 +132,14 @@ namespace JJIS {
 			lineIsComplete = true;
 			scriptCurrent++;
 			scriptSubText.text = "<...>";
+			yield return 0f;
 		}
 
-		//Scrolls through all the letters in the line of text
-		//and handles html tag formatting.
-		IEnumerator NextDialogue(int currentIndex) {
+		// Handles time between scrolling letters.
+		private float timeBetweenLetters = 0.03f;
+
+		//This method scrolls through the dialogue line and displays letter-by-letter.
+		IEnumerator<float> NextDialogue(int currentIndex) {
 			string fullString = "";
 			bool markup = false;
 			lineIsComplete = false;
@@ -139,7 +160,7 @@ namespace JJIS {
 						scriptText.text = fullString;
 						sfx_src.PlayOneShot(sfxClip);
 						sfx_src.pitch = Random.Range(minPitchMod,maxPitchMod);
-						yield return new WaitForSeconds(timer);
+						yield return Timing.WaitForSeconds(timeBetweenLetters);
 					}
 				}
 				if(scriptCurrent < scriptCapacity-1) {
