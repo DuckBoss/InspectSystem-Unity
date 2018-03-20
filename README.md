@@ -1,5 +1,5 @@
 # InspectSystem-Unity
-An inspection/examination system to read in-game signs, walls, etc
+An inspection/examination system to read in-game signs, walls, etc.  
 Tested on Unity 2017.
 
 [![GitHub release](https://img.shields.io/badge/Build-1.03-brightgreen.svg)](https://github.com/DuckBoss/InspectSystem-Unity/releases/latest)
