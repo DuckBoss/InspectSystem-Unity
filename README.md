@@ -1,12 +1,13 @@
 # InspectSystem-Unity
 An inspection/examination system to read in-game signs, walls, etc.  
-Tested on Unity 2017.
+Tested on Unity 2017/2018.
 
 [![GitHub release](https://img.shields.io/badge/Build-1.03-brightgreen.svg)](https://github.com/DuckBoss/InspectSystem-Unity/releases/latest)
 [![Packagist](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/DuckBoss/InspectSystem-Unity/blob/master/LICENSE)
 
 ## Dependencies
-1) <b>Text Mesh Pro</b> (Available for Free on the Unity Asset Store, used for the in-game UI, can be replaced with default Unity UI elements by messing with the code very easily)
+1) <b>Text Mesh Pro</b> (Available for Free on the Unity Asset Store, used for the in-game UI, can be replaced with default Unity UI elements by messing with the code very easily)  
+<i> Note:  Text Mesh Pro is now a built-in package with Unity 2018+ </i>
 
 2) <b>Unity Standard Assets</b> (For the demo project, this isn't required for implementing into your own games)
 
