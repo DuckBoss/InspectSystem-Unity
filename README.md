@@ -14,10 +14,12 @@ Tested on Unity 2017/2018.
 ## Demo Scene
 - Press 'E' while looking at the sign and standing next to it.
 
-## Recently Added Features
-- Added configuration for reinspectable or non-reinspectable objects. (can/cannot inspect items more than once)
+## Features
+- Supports markup language in text dialogues
+- Supports pitch modulated sfx for text dialogues
+- Configuration for reinspectable or non-reinspectable objects. (can/cannot inspect items more than once)
 - Implemented unityevents that can be executed at the end of inspection dialogues
-- Added Tooltips to help explain inspector variables
+- Tooltips to help explain inspector variables
 
 ## Current Issues/Notifications
 - <b> Please use the updated release builds for maximum compatibility! </b>
