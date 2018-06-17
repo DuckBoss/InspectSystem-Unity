@@ -19,7 +19,5 @@ Tested on Unity 2017/2018.
 - Implemented unityevents that can be executed at the end of inspection dialogues
 - Added Tooltips to help explain inspector variables
 
-## Current Issues
-- Text Mesh Pro sometimes doesn't display the instructions above the sign in the demo scene on first start up.
-(Not an issue with the Inspect System)
+## Current Issues/Notifications
 - <b> Please use the updated release builds for maximum compatibility! </b>
