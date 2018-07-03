@@ -1,7 +1,5 @@
 # NOTICE:
-I will be reworking the scripts and assets in this repository to make it more streamlined for Unity 2018.2  
-I will be making the reworked version the main branch, and move the current pre-2018 version to a legacy branch.  
-
+I AM CURRENTLY WORKING ON AN UPDATED VERSION FOR UNITY v2018. IT WILL BE A LOT MORE STREAMLINED AND EASIER TO INTEGRATE INTO ANY PROJECT.
 
 # InspectSystem-Unity
 An inspection/examination system to read in-game signs, walls, etc.  
