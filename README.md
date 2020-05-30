@@ -1,6 +1,3 @@
-# NOTICE:
-<b>I AM CURRENTLY WORKING ON AN UPDATED VERSION FOR UNITY v2018. IT WILL BE A LOT MORE STREAMLINED AND EASIER TO INTEGRATE INTO ANY PROJECT.</b>
-
 # InspectSystem-Unity
 An inspection/examination system to read in-game signs, walls, etc.  
 Tested on Unity 2017/2018.
